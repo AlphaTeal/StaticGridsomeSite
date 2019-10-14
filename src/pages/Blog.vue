@@ -1,14 +1,39 @@
 <template>
   <Layout>
     <h1>Blog</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error doloremque omnis animi, eligendi magni a voluptatum, vitae, consequuntur rerum illum odit fugit assumenda rem dolores inventore iste reprehenderit maxime! Iusto.</p>
+    <section class="posts">
+        <PostList v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node"></PostList>
+    </section>
   </Layout>
 </template>
 
 <script>
+import PostList from '~/components/PostList';
+
 export default {
+    components: {
+        PostList
+    },
   metaInfo: {
-    title: 'Blog'
-  }
-}
+    title: 'Blog',
+  },
+};
 </script>
+
+<page-query>
+query {
+    allPost {
+        totalCount
+        edges {
+            node {
+                id
+                title
+                timeToRead
+                description
+                date (format: "MMMM D, YYYY")
+                path
+            }
+        }
+    }
+}
+</page-query>
