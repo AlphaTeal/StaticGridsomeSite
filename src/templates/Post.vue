@@ -14,6 +14,12 @@
     </Layout>
 </template>
 
+<style>
+img {
+    max-width: 760px;
+}
+</style>
+
 <page-query>
 query Post ($path: String!) {
     post: post (path: $path) {
